@@ -1,4 +1,4 @@
-# Aiogram 3 New Template (SQLite db)
+# Get All Chat ID Bot (SQLite db)
 
 ### 1. Create virtual environment and install packages
 Windows
