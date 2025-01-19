@@ -14,15 +14,11 @@ class ThrottlingMiddleware(BaseMiddleware):
         user_id = event.from_user.id
         current_time = time.time()
         
-        # Ushbu foydalanuvchining so'nggi so'rovi bo'yicha yozuv mavjudligini tekshirish
         last_request_time = self.user_timeouts.get(user_id, 0)
         if current_time - last_request_time < self.slow_mode_delay:
-            # Agar so'rovlar juda tez-tez bo'lsa, sekin rejimni yoqish
-            await event.reply("Juda ko'p so'rov! Biroz kuting.")
+            await event.reply("Spam!")
             return
         
         else:
-            # Oxirgi so'rovning vaqtini yangilash
             self.user_timeouts[user_id] = current_time
-            # Event ni handlerga o'tkazish
             return await handler(event, data)
